@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الصور | ماركت الصاوى</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-brown: #2c1810;
+            --orange: #ff7b25;
+            --light-brown: #3d2b1f;
+            --text-light: #f8f8f8;
+            --text-dark: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-brown), var(--light-brown));
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* ماركيه أعلى الشاشة */
+        .marquee {
+            background-color: var(--orange);
+            color: var(--dark-brown);
+            padding: 8px 0;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .marquee-text {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* القائمة الرئيسية */
+        .header {
+            background-color: rgba(44, 24, 16, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            margin-right: 10px;
+            color: var(--orange);
+        }
+        
+        .logo span {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .nav-menu li:not(:last-child)::after {
+            content: "|";
+            color: var(--orange);
+            position: absolute;
+            left: -18px;
+            top: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--orange);
+        }
+        
+        .home-btn {
+            background-color: var(--orange);
+            color: var(--dark-brown);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: #ff9a52;
+            transform: translateY(-2px);
+        }
+        
+        /* الأقسام العامة */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--orange);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--orange);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: expandLine 1.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes expandLine {
+            to {
+                transform: scaleX(1);
+            }
+        }
+        
+        /* قسم التصنيفات */
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .category-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 2px solid var(--orange);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--orange);
+            color: var(--dark-brown);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 123, 37, 0.3);
+        }
+        
+        /* معرض الصور */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .image-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            position: relative;
+        }
+        
+        .image-card:nth-child(1) { animation-delay: 0.1s; }
+        .image-card:nth-child(2) { animation-delay: 0.2s; }
+        .image-card:nth-child(3) { animation-delay: 0.3s; }
+        .image-card:nth-child(4) { animation-delay: 0.4s; }
+        .image-card:nth-child(5) { animation-delay: 0.5s; }
+        .image-card:nth-child(6) { animation-delay: 0.6s; }
+        .image-card:nth-child(7) { animation-delay: 0.7s; }
+        .image-card:nth-child(8) { animation-delay: 0.8s; }
+        .image-card:nth-child(9) { animation-delay: 0.9s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .image-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .image-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--orange), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .image-card:hover::before {
+            opacity: 0.1;
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .image-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(44, 24, 16, 0.9));
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+        
+        .image-card:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        .image-caption {
+            color: var(--text-light);
+            text-align: center;
+            width: 100%;
+        }
+        
+        .image-caption h3 {
+            color: var(--orange);
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+        
+        .image-caption p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255, 123, 37, 0.3);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--orange);
+            font-size: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+        
+        .lightbox-nav button {
+            background: var(--orange);
+            color: var(--dark-brown);
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-nav button:hover {
+            background: #ff9a52;
+            transform: scale(1.1);
+        }
+        
+        /* قسم الإحصائيات */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--orange);
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        /* حقوق النشر */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .copyright {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .designer {
+            color: var(--orange);
+            font-weight: bold;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-menu li {
+                margin: 5px 10px;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .categories {
+                gap: 10px;
+            }
+            
+            .category-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ماركيه أعلى الشاشة -->
+    <div class="marquee">
+        <div class="marquee-text">
+            <i class="fas fa-star"></i>  معرض الصور - اكتشف أجمل اللقطات من ماركت الصاوى - أقسام متنوعة - منتجات طازجة - عروض خاصة <i class="fas fa-star"></i>
+        </div>
+    </div>
+    
+    <!-- الرأس والقائمة -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <h1> ماركت الصاوى <span>| Elsawy market</span></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="gallery.html" class="home-btn">معرض الصور</a></li>
+                <li><a href="videos.html">الفيديوهات</a></li>
+                <li><a href="about.html">نبذة عنا</a></li>
+                <li><a href="branches.html">فروعنا</a></li>
+				<li><a href="offers.html" class="home-btn">صفحة العروض</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <!-- قسم معرض الصور -->
+    <section>
+        <div class="section-title">
+            <h2>معرض الصور</h2>
+            <p>استمتع بمشاهدة أجمل اللقطات من فروعنا المختلفة وأقسامنا المتنوعة</p>
+        </div>
+        
+        <!-- تصنيفات الصور -->
+        <div class="categories">
+            <button class="category-btn active" data-filter="all">الكل</button>
+            <button class="category-btn" data-filter="products">المنتجات</button>
+            <button class="category-btn" data-filter="market">أقسام الماركت</button>
+            <button class="category-btn" data-filter="offers">العروض</button>
+            <button class="category-btn" data-filter="team">فريق العمل</button>
+        </div>
+        
+        <!-- معرض الصور -->
+        <div class="gallery">
+            <!-- الصورة 1 -->
+            <div class="image-card" data-category="market">
+                <img src="a1.jpg" alt="القسم الرئيسي">
+                <div class="image-overlay">
+                    <div class="image-caption">
+                        <h3>القسم الرئيسي</h3>
+                        <p>أجواء التسوق في القسم الرئيسي بالماركت</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصورة 2 -->
+            <div class="image-card" data-category="products">
+                <img src="a2.jpg" alt="الفواكه الطازجة">
+                <div class="image-overlay">
+                    <div class="image-caption">
+                        <h3>الفواكه الطازجة</h3>
+                        <p>تشكيلة متنوعة من الفواكه الموسمية</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصورة 3 -->
+            <div class="image-card" data-category="products">
+                <img src="a3.jpg" alt="الخضروات">
+                <div class="image-overlay">
+                    <div class="image-caption">
+                        <h3>الخضروات الطازجة</h3>
+                        <p>خضروات يومية بجودة عالية</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصورة 4 -->
+            <div class="image-card" data-category="market">
+                <img src="a4.jpg" alt="قسم اللحوم">
+                <div class="image-overlay">
+                    <div class="image-caption">
+                        <h3>قسم اللحوم</h3>
+                        <p>لحوم طازجة معروضة بأناقة</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصورة 5 -->
+            <div class="image-card" data-category="offers">
+                <img src="a5.jpg" alt="عروض خاصة">
+                <div class="image-overlay">
+                    <div class="image-caption">
+                        <h3>عروض خاصة</h3>
+                        <p>تخفيضات تصل إلى 50% على مختلف المنتجات</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصورة 6 -->
+            <div class="image-card" data-category="market">
+                <img src="a6.jpg" alt="قسم الألبان">
+                <div class="image-overlay">
+                    <div class="image-caption">
+                        <h3>قسم الألبان</h3>
+                        <p>منتجات ألبان متنوعة من أفضل الموردين</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصورة 7 -->
+            <div class="image-card" data-category="team">
+                <img src="a7.jpg" alt="فريق العمل">
+                <div class="image-overlay">
+                    <div class="image-caption">
+                        <h3>فريق العمل</h3>
+                        <p>فريق متكامل لخدمتكم على أكمل وجه</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصورة 8 -->
+            <div class="image-card" data-category="offers">
+                <img src="a8.jpg" alt="عروض نهاية الأسبوع">
+                <div class="image-overlay">
+                    <div class="image-caption">
+                        <h3>عروض نهاية الأسبوع</h3>
+                        <p>خصومات حصرية أيام الجمعة والسبت</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصورة 9 -->
+            <div class="image-card" data-category="products">
+                <img src="a9.jpg" alt="المشروبات">
+                <div class="image-overlay">
+                    <div class="image-caption">
+                        <h3>المشروبات</h3>
+                        <p>تشكيلة واسعة من المشروبات الباردة والساخنة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- إحصائيات -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-text">صورة في المعرض</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">9</div>
+                <div class="stat-text">أقسام مختلفة</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-text">عرض شهري</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-text">فروع مصورة</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-nav">
+            <button onclick="changeImage(-1)">❮</button>
+            <button onclick="changeImage(1)">❯</button>
+        </div>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+    
+    <!-- حقوق النشر -->
+    <footer class="footer">
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة لدى ماركت الصاوى @ 2026</p>
+            <p>تم التصميم والبرمجة بواسطة <span class="designer">المهندس نصر علوان هاتف رقم 01149923916</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // تصفية الصور حسب التصنيف
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.category-btn');
+            const imageCards = document.querySelectorAll('.image-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // إزالة النشاط من جميع الأزرار
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // إضافة النشاط للزر المختار
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    imageCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const images = document.querySelectorAll('.image-card img');
+            let currentImageIndex = 0;
+            
+            images.forEach((img, index) => {
+                img.addEventListener('click', function() {
+                    currentImageIndex = index;
+                    lightboxImg.src = this.src;
+                    lightbox.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // تأثيرات التمرير
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            imageCards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function changeImage(direction) {
+            const images = document.querySelectorAll('.image-card img');
+            currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
+            document.getElementById('lightbox-img').src = images[currentImageIndex].src;
+        }
+        
+        // إغلاق الـ Lightbox بالضغط على ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> الصفحة الرئيسية | ماركت الصاوى</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-brown: #2c1810;
+            --orange: #ff7b25;
+            --light-brown: #3d2b1f;
+            --text-light: #f8f8f8;
+            --text-dark: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-brown), var(--light-brown));
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* ماركيه أعلى الشاشة */
+        .marquee {
+            background-color: var(--orange);
+            color: var(--dark-brown);
+            padding: 8px 0;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .marquee-text {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* القائمة الرئيسية */
+        .header {
+            background-color: rgba(44, 24, 16, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            margin-right: 10px;
+            color: var(--orange);
+        }
+        
+        .logo span {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .nav-menu li:not(:last-child)::after {
+            content: "|";
+            color: var(--orange);
+            position: absolute;
+            left: -18px;
+            top: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--orange);
+        }
+        
+        .home-btn {
+            background-color: var(--orange);
+            color: var(--dark-brown);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: #ff9a52;
+            transform: translateY(-2px);
+        }
+        
+        /* الأقسام العامة */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--orange);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--orange);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: expandLine 1.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes expandLine {
+            to {
+                transform: scaleX(1);
+            }
+        }
+        
+        /* قسم الترحيب */
+        .welcome-section {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .welcome-title {
+            font-size: 48px;
+            color: var(--orange);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .welcome-subtitle {
+            font-size: 24px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+        
+        .welcome-description {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* قسم المميزات */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--orange);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            color: var(--orange);
+            margin-bottom: 15px;
+        }
+        
+        /* حقوق النشر */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .copyright {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .designer {
+            color: var(--orange);
+            font-weight: bold;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-menu li {
+                margin: 5px 10px;
+            }
+            
+            .welcome-title {
+                font-size: 36px;
+            }
+            
+            .welcome-subtitle {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ماركيه أعلى الشاشة -->
+    <div class="marquee">
+        <div class="marquee-text">
+            <i class="fas fa-star"></i>  ماركت الصاوى - أفضل الأسعار وأجود المنتجات - تخفيضات تصل إلى 50% - خدمة التوصيل للمنازل متاحة - عروض خاصة على اللحوم والفواكه <i class="fas fa-star"></i>
+        </div>
+    </div>
+    
+    <!-- الرأس والقائمة -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <h1> ماركت الصاوى <span>| Elsawy market</span></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="home-btn">الرئيسية</a></li>
+                <li><a href="gallery.html">معرض الصور</a></li>
+                <li><a href="videos.html">الفيديوهات</a></li>
+                <li><a href="about.html">نبذة عنا</a></li>
+				<li><a href="branches.html" class="home-btn">فروعنا</a></li>
+				<li><a href="offers.html" class="home-btn">صفحة العروض</a></li>
+				<li><a href="earnings.html" class="home-btn">الإحصائيات</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <!-- قسم الترحيب -->
+    <section class="welcome-section">
+        <h1 class="welcome-title">مرحباً بكم في ماركت الصاوى</h1>
+        <p class="welcome-subtitle">وجهتكم الأولى للتسوق بجودة عالية وأسعار منافسة</p>
+        <p class="welcome-description">
+            نسعى دائماً لتقديم أفضل المنتجات الغذائية والاستهلاكية لعملائنا الكرام. 
+            مع فريق عمل متميز وخدمة توصيل سريعة، نضمن لكم تجربة تسوق فريدة لا تُنسى.
+        </p>
+    </section>
+    
+    <!-- قسم المميزات -->
+    <section>
+        <div class="section-title">
+            <h2>لماذا تختار ماركت الصاوى؟</h2>
+        </div>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h3>أفضل الأسعار</h3>
+                <p>نقدم لكم عروضاً وتخفيضات مستمرة تصل إلى 50% على مختلف المنتجات</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3>توصيل سريع</h3>
+                <p>خدمة التوصيل للمنازل متاحة بسرعة وكفاءة عالية في جميع أنحاء المنطقة</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>جودة عالية</h3>
+                <p>نحرص على تقديم أجود المنتجات من أفضل الموردين المحليين والدوليين</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم دعوة للتصفح -->
+    <section>
+        <div class="section-title">
+            <h2>استكشف ماركت الصاوى</h2>
+        </div>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-images"></i>
+                </div>
+                <h3><a href="gallery.html" style="color: var(--orange); text-decoration: none;">معرض الصور</a></h3>
+                <p>شاهد أجمل اللقطات من داخل ماركتنا وأقسامنا المختلفة</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3><a href="videos.html" style="color: var(--orange); text-decoration: none;">معرض الفيديوهات</a></h3>
+                <p>جولات مصورة داخل الماركت وتعريف بخدماتنا</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3><a href="about.html" style="color: var(--orange); text-decoration: none;">تعرف علينا</a></h3>
+                <p>اقرأ المزيد عن قصة تأسيسنا ورسالتنا ورؤيتنا</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- حقوق النشر -->
+    <footer class="footer">
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة لدى ماركت الصاوى @ 2026</p>
+            <p>تم التصميم والبرمجة بواسطة <span class="designer">المهندس نصر علوان هاتف رقم 01149923916</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية إضافية
+        document.addEventListener('DOMContentLoaded', function() {
+            // تأثير التمرير السلس للروابط
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

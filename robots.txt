@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap:https://nnasrh612025-lab.github.io/web-nasr1/sitemap.xml

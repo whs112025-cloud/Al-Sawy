@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الفيديوهات | ماركت الصاوى</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-brown: #2c1810;
+            --orange: #ff7b25;
+            --light-brown: #3d2b1f;
+            --text-light: #f8f8f8;
+            --text-dark: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-brown), var(--light-brown));
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* شاشة التحميل */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-brown);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loader-content {
+            text-align: center;
+        }
+        
+        .loader-logo {
+            font-size: 60px;
+            color: var(--orange);
+            margin-bottom: 20px;
+        }
+        
+        .loader-text {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+        
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        .loader-progress {
+            height: 100%;
+            background: var(--orange);
+            width: 0%;
+            animation: loading 2s ease-in-out forwards;
+        }
+        
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        /* ماركيه أعلى الشاشة */
+        .marquee-section {
+            background-color: var(--orange);
+            padding: 10px 0;
+            overflow: hidden;
+        }
+        
+        .marquee {
+            color: var(--dark-brown);
+            font-weight: bold;
+            font-size: 18px;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* محتوى الصفحة */
+        .page-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: var(--orange);
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        /* تصميم الفيديوهات */
+        video {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin: 20px 0;
+            border: 3px solid var(--orange);
+        }
+        
+        hr {
+            border: none;
+            height: 3px;
+            background: var(--orange);
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+        
+        /* زر العودة */
+        .back-button {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--dark-brown);
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: #ff9a52;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 123, 37, 0.4);
+        }
+        
+        /* حقوق النشر */
+        .copyright {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+        }
+        
+        .copyright p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة التحميل -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <i class="fas fa-video"></i>
+            </div>
+            <div class="loader-text">معرض الفيديوهات</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الماركيه العلوي -->
+    <div class="marquee-section">
+        <div class="marquee">
+            🎯 معرض الفيديوهات 🎯 ماركت الصاوى 🎯
+        </div>
+    </div>
+
+    <!-- محتوى الصفحة -->
+    <div class="page-content">
+        <h1>معرض الفيديو الخاص بماركت الصاوى</h1>
+        <p>شاهد جولات مصورة داخل الماركت وتعرف على خدماتنا وعروضنا</p>
+        <p style="background: var(--orange); color: var(--dark-brown); padding: 10px; border-radius: 5px; font-weight: bold;">جولة في أبرز أقسام الماركت وخدماتنا</p>
+        
+        <center><h2>فريقنا المحترف في العمل وتجهيز طلباتكم</h2></center>
+        
+        <!-- الفيديوهات -->
+        <div>
+            <video width="100%" height="500" controls>
+                <source src="1.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو
+            </video>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <video width="100%" height="500" controls>
+                <source src="2.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو
+            </video>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <video width="100%" height="500" controls>
+                <source src="3.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو
+            </video>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <video width="100%" height="500" controls>
+                <source src="4.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو
+            </video>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <video width="100%" height="500" controls>
+                <source src="5.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو
+            </video>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <video width="100%" height="500" controls>
+                <source src="6.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو
+            </video>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <video width="100%" height="500" controls>
+                <source src="7.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو
+            </video>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <video width="100%" height="500" controls>
+                <source src="8.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو
+            </video>
+        </div>
+        
+        <div>
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-right"></i> العودة للرئيسية
+            </a>
+        </div>
+    </div>
+
+    <!-- الماركيه السفلي -->
+    <div class="marquee-section">
+        <div class="marquee">
+            🎯 ماركت الصاوى - الإبداع والتميز 🎯
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>© 2025 ماركت الصاوى. جميع الحقوق محفوظة. | مصمم الموقع: المهندس نصر علوان</p>
+    </div>
+
+    <script>
+        // إخفاء شاشة التحميل بعد تحميل الصفحة
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('pageLoader').style.display = 'none';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

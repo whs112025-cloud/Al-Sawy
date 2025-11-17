@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    
+    <!-- الصفحة الرئيسية -->
+    <url>
+        <loc>https://elsawymarket.com/index.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- صفحة التسجيل -->
+    <url>
+        <loc>https://elsawymarket.com/register.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- صفحة العروض -->
+    <url>
+        <loc>https://elsawymarket.com/offers.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- معرض الصور -->
+    <url>
+        <loc>https://elsawymarket.com/gallery.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- معرض الفيديوهات -->
+    <url>
+        <loc>https://elsawymarket.com/videos.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- فروعنا -->
+    <url>
+        <loc>https://elsawymarket.com/branches.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- نبذة عنا -->
+    <url>
+        <loc>https://elsawymarket.com/about.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- اتصل بنا -->
+    <url>
+        <loc>https://elsawymarket.com/contact.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+</urlset>

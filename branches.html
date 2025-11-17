@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروعنا | ماركت الصاوى</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-brown: #2c1810;
+            --orange: #ff7b25;
+            --light-brown: #3d2b1f;
+            --text-light: #f8f8f8;
+            --text-dark: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-brown), var(--light-brown));
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* ماركيه أعلى الشاشة */
+        .marquee {
+            background-color: var(--orange);
+            color: var(--dark-brown);
+            padding: 8px 0;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .marquee-text {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* القائمة الرئيسية */
+        .header {
+            background-color: rgba(44, 24, 16, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            margin-right: 10px;
+            color: var(--orange);
+        }
+        
+        .logo span {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .nav-menu li:not(:last-child)::after {
+            content: "|";
+            color: var(--orange);
+            position: absolute;
+            left: -18px;
+            top: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--orange);
+        }
+        
+        .home-btn {
+            background-color: var(--orange);
+            color: var(--dark-brown);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: #ff9a52;
+            transform: translateY(-2px);
+        }
+        
+        /* الأقسام العامة */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--orange);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--orange);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: expandLine 1.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes expandLine {
+            to {
+                transform: scaleX(1);
+            }
+        }
+        
+        /* قسم الفروع */
+        .branches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .branch-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .branch-card:nth-child(1) { animation-delay: 0.2s; }
+        .branch-card:nth-child(2) { animation-delay: 0.4s; }
+        .branch-card:nth-child(3) { animation-delay: 0.6s; }
+        .branch-card:nth-child(4) { animation-delay: 0.8s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .branch-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .branch-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--orange);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .branch-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .branch-icon {
+            font-size: 50px;
+            color: var(--orange);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .branch-card:hover .branch-icon {
+            transform: scale(1.2);
+        }
+        
+        .branch-card h3 {
+            color: var(--orange);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .branch-info {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .branch-info p {
+            margin-bottom: 8px;
+        }
+        
+        .branch-link {
+            display: inline-block;
+            background-color: var(--orange);
+            color: var(--dark-brown);
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .branch-link:hover {
+            background-color: #ff9a52;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 123, 37, 0.3);
+        }
+        
+        .link-placeholder {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px dashed var(--orange);
+        }
+        
+        .link-placeholder p {
+            margin-bottom: 8px;
+            color: var(--orange);
+            font-weight: bold;
+        }
+        
+        .link-placeholder input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-size: 14px;
+            direction: ltr;
+        }
+        
+        /* قسم إضافي للمعلومات */
+        .branches-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .info-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .info-icon {
+            font-size: 40px;
+            color: var(--orange);
+            margin-bottom: 15px;
+        }
+        
+        .info-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--orange);
+            margin-bottom: 10px;
+        }
+        
+        .info-text {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        /* حقوق النشر */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .copyright {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .designer {
+            color: var(--orange);
+            font-weight: bold;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-menu li {
+                margin: 5px 10px;
+            }
+            
+            .branches-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .branch-card {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ماركيه أعلى الشاشة -->
+    <div class="marquee">
+        <div class="marquee-text">
+            <i class="fas fa-star"></i>  ماركت الصاوى - أربعة فروع لخدمتكم - أفضل الأسعار وأجود المنتجات - خدمة التوصيل للمنازل متاحة <i class="fas fa-star"></i>
+        </div>
+    </div>
+    
+    <!-- الرأس والقائمة -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <h1> ماركت الصاوى <span>| Elsawy market</span></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="gallery.html">معرض الصور</a></li>
+                <li><a href="videos.html">الفيديوهات</a></li>
+                <li><a href="about.html">نبذة عنا</a></li>
+                <li><a href="branches.html" class="home-btn">فروعنا</a></li>
+				<li><a href="offers.html" class="home-btn">صفحة العروض</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <!-- قسم الفروع -->
+    <section>
+        <div class="section-title">
+            <h2>فروع ماركت الصاوى</h2>
+            <p>نحن نخدمكم من خلال أربعة فروع استراتيجية في مختلف أنحاء المدينة</p>
+        </div>
+        <div class="branches-grid">
+            <!-- الفرع الرئيسي -->
+            <div class="branch-card">
+                <div class="branch-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3>الفرع الرئيسي</h3>
+                <div class="branch-info">
+                    <p><strong>العنوان:</strong> شارع التسوق الرئيسي، المنطقة المركزية</p>
+                    <p><strong>هاتف:</strong> 01069455070</p>
+                    <p><strong>ساعات العمل:</strong> 8 صباحاً - 12 منتصف الليل</p>
+                    <p>أكبر فروعنا وأكثرها اكتمالاً من حيث التنوع والخدمات</p>
+                </div>
+                <div class="link-placeholder">
+                    <p>رابط الموقع على الخريطة:</p>
+                    <input type="text" value="https://maps.app.goo.gl/FGL7tfMGUP3EMHD86" readonly>
+                </div>
+                <a href="https://www.google.com/maps/place/%D9%85%D8%AD%D9%84%D8%A7%D8%AA+%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%B1%D8%A7%D8%B2%D9%82+%D8%A7%D9%84%D8%B4%D9%8A%D8%AE%E2%80%AD/@30.2845964,30.1924873,17z/data=!3m1!4b1!4m6!3m5!1s0x1458cd85cca2b35f:0x7c8847224bccfdf5!8m2!3d30.2845918!4d30.1899124!16s%2Fg%2F11tbx0qptj?hl=ar&entry=ttu&g_ep=EgoyMDI1MTEwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="branch-link">
+                    <i class="fas fa-map-marker-alt"></i> عرض على الخريطة
+                </a>
+            </div>
+            
+            <!-- الفرع الثاني -->
+            <div class="branch-card">
+                <div class="branch-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3>فرع المدينة الجديدة</h3>
+                <div class="branch-info">
+                    <p><strong>العنوان:</strong> مجمع المدينة الجديدة، برج التسوق</p>
+                    <p><strong>هاتف:</strong> 01006249556</p>
+                    <p><strong>ساعات العمل:</strong> 9 صباحاً - 11 مساءً</p>
+                    <p>يتميز بموقعه الاستراتيجي في المنطقة السكنية الحديثة</p>
+                </div>
+                <div class="link-placeholder">
+                    <p>ادخل رابط الفرع هنا:</p>
+                    <input type="text" placeholder="https://example.com/branch2" readonly>
+                </div>
+                <a href="#" class="branch-link">زيارة صفحة الفرع</a>
+            </div>
+            
+            <!-- الفرع الثالث -->
+            <div class="branch-card">
+                <div class="branch-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3>فرع المنطقة الشرقية</h3>
+                <div class="branch-info">
+                    <p><strong>العنوان:</strong> شارع النخيل، المنطقة الشرقية</p>
+                    <p><strong>هاتف:</strong> 01149923916</p>
+                    <p><strong>ساعات العمل:</strong> 8 صباحاً - 12 منتصف الليل</p>
+                    <p>يقدم عروضاً خاصة على المنتجات الطازجة والمحلية</p>
+                </div>
+                <div class="link-placeholder">
+                    <p>ادخل رابط الفرع هنا:</p>
+                    <input type="text" placeholder="https://example.com/branch3" readonly>
+                </div>
+                <a href="#" class="branch-link">زيارة صفحة الفرع</a>
+            </div>
+            
+            <!-- الفرع الرابع -->
+            <div class="branch-card">
+                <div class="branch-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3>فرع الواحة</h3>
+                <div class="branch-info">
+                    <p><strong>العنوان:</strong> مجمع الواحة التجاري، الطابق الأرضي</p>
+                    <p><strong>هاتف:</strong> 01234567890</p>
+                    <p><strong>ساعات العمل:</strong> 10 صباحاً - 10 مساءً</p>
+                    <p>أحدث فروعنا، مصمم بأحدث تقنيات التسوق الحديث</p>
+                </div>
+                <div class="link-placeholder">
+                    <p>ادخل رابط الفرع هنا:</p>
+                    <input type="text" placeholder="https://example.com/branch4" readonly>
+                </div>
+                <a href="#" class="branch-link">زيارة صفحة الفرع</a>
+            </div>
+        </div>
+        
+        <!-- قسم المعلومات الإضافية -->
+        <div class="branches-info">
+            <h3 style="color: var(--orange); margin-bottom: 30px;">إحصائيات فروعنا</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="info-number">50+</div>
+                    <div class="info-text">موظف</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="info-number">10,000+</div>
+                    <div class="info-text">عميل شهري</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="info-number">5,000+</div>
+                    <div class="info-text">منتج متنوع</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="info-number">4</div>
+                    <div class="info-text">سيارات توصيل</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- حقوق النشر -->
+    <footer class="footer">
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة لدى ماركت الصاوى @ 2026</p>
+            <p>تم التصميم والبرمجة بواسطة <span class="designer">المهندس نصر علوان هاتف رقم 01149923916</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية إضافية
+        document.addEventListener('DOMContentLoaded', function() {
+            // تأثير التمرير السلس للروابط
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // إضافة تأثيرات للبطاقات عند التمرير
+            const branchCards = document.querySelectorAll('.branch-card');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            branchCards.forEach(card => {
+                observer.observe(card);
+            });
+            
+            // نسخ الرابط عند النقر على حقل الإدخال
+            document.querySelectorAll('.link-placeholder input').forEach(input => {
+                input.addEventListener('click', function() {
+                    this.select();
+                    document.execCommand('copy');
+                    // تأثير بسيط للإشارة إلى النسخ
+                    const originalBorder = this.style.border;
+                    this.style.border = '2px solid var(--orange)';
+                    setTimeout(() => {
+                        this.style.border = originalBorder;
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
